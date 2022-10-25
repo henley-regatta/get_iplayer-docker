@@ -1,3 +1,8 @@
+# Notes for my modified version:
+
+  - Merged with `get_iplayer-docker-base` to force *arm64v8* architecture. Probably not a great idea size-wise.
+  - Add additional volume to support different output path for Radio shows (remember to update the **options** file to support this too) 
+
 # get_iplayer on Docker
 
 Disappointed with the current availability of get_iplayer in docker, I created an auto-updating docker container, complete with the webgui.
@@ -10,8 +15,9 @@ For now, this uses the plain Ubuntu image, so is huge for a very simple perl pro
     -p 8181:8181 \
     -v /etc/localtime:/etc/localtime:ro \
     -v </path/to/config>:/root/.get_iplayer \
-    -v </path/to/downloads>:/root/output \
-    kolonuk/get_iplayer
+    -v </path/to/tvdownloads>:/root/output \
+    -v </path/to/radiodownloads>:/root/outputradio \
+    henley-regatta/get_iplayer
 
 * Backup your current config and recordings.
 * Mount `/root/.get_iplayer` to your config directory.  This should include your `options` file and `pvr` directory.  If starting from scratch, you can manually edit the `options` file created here.
